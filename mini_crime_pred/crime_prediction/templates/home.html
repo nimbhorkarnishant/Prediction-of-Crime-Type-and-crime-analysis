@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Crime Analysis</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+		<style media="screen">
+		nav{
+			display: flex;
+			background: #333;  /* fallback for old browsers #573d7a*/
+			background: -webkit-linear-gradient(to right, #333,#333);  /* Chrome 10-25, Safari 5.1-6 */
+			background: linear-gradient(to right, #333,#333); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+		}
+		footer{
+		  display: flex;
+		  background-color: #333;
+		  height: 70px;
+		  bottom: 0px;
+		  left: 0px;
+		  right: 0px;
+		  margin-bottom: -19px;
+		}
+
+		footer div{
+		  height: 10vh;
+
+
+
+		}
+		/* Set a style for all buttons cc338b */
+
+		.button_box {
+		  background-color:pink;
+		  color: white;
+		  padding: 8px 20px;
+		  margin: 10px 0;
+		  border: none;
+		  cursor: pointer;
+		  width: 40%;
+		  opacity: 0.9;
+		  margin-left: 25%;
+		}
+
+		.button_box:hover {
+		  opacity:1;
+		}
+		</style>
+  </head>
+  <body
+    style="background-image: url("{% static 'home_img.jpg' %}");background-size: cover;"
+  >
+	<nav class="navbar navbar-light bg-light">
+		<a class="navbar-brand" style="font-family: "Big Shoulders Text", cursive;  font-weight: bold; color:darkgreen; font-size: 1rem; "><b style="color:#FFF;"><i>MINI PROJECT</i></b></a>
+	</nav>
+	{% if messages %}
+					{% for message in messages %}
+						<div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %} alert-dismissable" style="margin-top:5px;">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								<strong>{{ message.tags|title }}!</strong>
+									{{ message }}
+						 </div>
+					 {% endfor %}
+			 {% endif %}
+	<div class="">
+		<center><h4 style="color:darkgreen"><b><i>Crime Analysis And Prediction Of Crime Type </i></b></h4></center>
+	</div>
+		<img src="{% static 'img/home_img.jpg' %}" alt="" height="300px" width="100%">
+	<form method="post" action="/predecting_crime_type/">
+		{% csrf_token %}
+    <div
+      class="card w-75"
+      style="margin-left: 9vw; margin-top: 1vw; width: 900vw; border-radius: 10px;box-shadow: 10px 10px 8px #888888;"
+    >
+      <div class="card-body" style="display:inline-flex;">
+        <div class="input-group input-group-lg" style="width: 22vw;">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="selectSource">Source</label>
+          </div>
+          <select class="custom-select" id="selectSource" name="source" required>
+            <option value="None">Choose Location</option>
+          </select>
+        </div>
+
+        <div
+          class="input-group input-group-lg"
+          style="width: 30vw; margin-left: 3vw;"
+        >
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="selectDestination"
+              >Destination</label
+            >
+          </div>
+          <select class="custom-select" id="selectDestination" name="destination" required>
+            <option value="None">Choose Location...</option>
+          </select>
+        </div>
+        <div
+          class="input-group input-group-lg"
+          style="width: 20vw; margin-left: 2vw;"
+        >
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">day</label>
+          </div>
+          <select class="custom-select" id="inputGroupSelect01" name="day" required>
+            <option selected value="None">Choose...</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday </option>
+            <option value="Sunday">Sunday </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button
+        type="submit"
+        class="btn btn-success btn-lg"
+        style="margin-left: 42vw; margin-top: 2vh; padding: 25px;"
+      >
+        Predict
+      </button>
+    </div>
+	</form>
+
+		<div class="" style="margin-top:50px;">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="card">
+						<img src="" alt="" width="10%" height="10%">
+						<div class="card-body">
+							<h5 class="card-title" style="color:darkgreen">Analyse the Crime Data Of Cities</h5>
+							<a href="{% url 'crime_data_analysis' %}" class="" ><button type="button" name="button" class="button_box">Check Analysis</button></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="card">
+						<img src="" alt="" width="10%" height="10%">
+						<div class="card-body">
+							<h5 class="card-title" style="color:darkgreen">Analyse the Crime Data Of Cities by Day Wise</h5>
+							<a href="{% url 'crime_data_analysis_by_day'%}" class="" ><button type="button" name="button" class="button_box">Check Analysis</button></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+				<div class="col-sm-6"  style="margin-top:40px;">
+					<div class="card">
+						<img src="" alt="" width="10%" height="10%">
+						<div class="card-body">
+							<h5 class="card-title" style="color:darkgreen">Our Vision</h5>
+							<p class="card-text">Our Vision is to help the people who travels or who will go to unknown city
+								by predecting the type of crime according to location. We Also try to help police to analysis the crime data of city.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer style="margin-top:20px;">
+		 <div class="container">
+			 <p style="text-align: center; color: #fff; font-size: 1rem; padding-top: 0.2rem;">&copy; 2020 min project.in<p>
+		 </div>
+	 </footer>
+	 <script src="{%static 'js/location.js'%}"></script>
+
+  </body>
+</html>

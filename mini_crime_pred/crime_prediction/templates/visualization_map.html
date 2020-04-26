@@ -1,0 +1,165 @@
+<html>
+  <head>
+    <title>MINI Project|Crime Data Visualization</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+      <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+
+      <style>
+      /*font-family: 'Jomolhari', serif;
+      font-family: 'Big Shoulders Text', cursive;
+      font-family: 'ZCOOL XiaoWei', serif;*/
+
+        body{
+        margin: 0;
+        padding: 0;
+
+      }
+
+      nav{
+        display: flex;
+        background: #333;  /* fallback for old browsers #573d7a*/
+        background: -webkit-linear-gradient(to right, #333,#333);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #333,#333); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+      }
+
+      footer{
+        display: flex;
+        background-color: #333;
+        height: 70px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin-bottom: -19px;
+      }
+
+      footer div{
+        height: 10vh;
+
+
+      }
+
+
+      /* Set a style for all buttons */
+      button {
+        background-color: #333;
+        color: white;
+        padding: 8px 20px;
+        margin: 10px 0;
+        border: none;
+        cursor: pointer;
+        width: 40%;
+        opacity: 0.9;
+        margin-left: 25%;
+      }
+
+      button:hover {
+        opacity:1;
+      }
+
+      /* Change styles for cancel button and signup button on extra small screens */
+
+
+
+
+      </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-light bg-light">
+  		<a class="navbar-brand" style="font-family: "Big Shoulders Text", cursive;  font-weight: bold; color:darkgreen; font-size: 1rem; "><b style="color:#FFF;"><i>MINI PROJECT</i></b></a>
+  	</nav>
+    <div>
+      <a href="" id="next_page"><button style="margin-top:10px;"
+        type="button"
+        class="btn btn-success btn-lg"
+        style="margin-left: 42vw; margin-top: 2vh; padding: 25px;"
+      >
+      Go Next to check more detail
+      </button></a>
+    </div>
+
+    <div id="map_div" style="width: 100%; height: 100%"></div>
+
+    <footer style="margin-top:20px;">
+      <div class="container">
+        <p style="text-align: center; color: #fff; font-size: 1rem; padding-top: 0.2rem;">&copy; 2020 mini project.in<p>
+      </div>
+    </footer>
+
+  </body>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    var Robbery_count=0;
+    var Gambling_count=0;
+    var Accident_count=0;
+    var voilence_count=0;
+    var Kidnapping_count=0;
+    var murder_count=0;
+    var counting_list=[];
+    window.onload = function () {
+    google.charts.load("current", {
+      "packages":["map"],
+      // Note: you will need to get a mapsApiKey for your project.
+      // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+      "mapsApiKey": "AIzaSyBDHNdq-PDWpkE0m9J5EWrigfZ1J1ZGVUo"
+    });
+    var list_lattitude={{data.Lattitude}};
+    var list_longitude={{data.longitude}};
+    var list_Crime_type=[];
+    for (var i = 0; i < {{data.Crime_type}}.length; i++) {
+      if ({{data.Crime_type}}[i]==0) {
+        list_Crime_type.push("Robbery");
+        Robbery_count=Robbery_count+1;
+      }
+      else if ({{data.Crime_type}}[i]==1) {
+        list_Crime_type.push("Gambling");
+        Gambling_count=Gambling_count+1;
+      }
+      else if ({{data.Crime_type}}[i]==2) {
+        list_Crime_type.push("Accident");
+        Accident_count=Accident_count+1;
+
+      }
+      else if ({{data.Crime_type}}[i]==3) {
+        list_Crime_type.push("Violence");
+        voilence_count=voilence_count+1;
+      }
+      else if ({{data.Crime_type}}[i]==4) {
+        list_Crime_type.push("Kidnapping");
+        Kidnapping_count=Kidnapping_count+1;
+      }
+      else if ({{data.Crime_type}}[i]==5) {
+        list_Crime_type.push("Murder");
+        murder_count=murder_count+1;
+      }
+    }
+    counting_list.push(Robbery_count,Gambling_count,Accident_count,voilence_count,Kidnapping_count,murder_count);
+
+    var final_list_data=[];
+    final_list_data.push(['Lat', 'Long', 'Name']);
+    for (var i = 0; i < list_lattitude.length; i++) {
+      final_list_data.push([list_lattitude[i],list_longitude[i],list_Crime_type[i]]);
+    }
+    console.log(final_list_data);
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable(final_list_data);
+
+      var map = new google.visualization.Map(document.getElementById('map_div'));
+      map.draw(data, {
+        showTooltip: true,
+        showInfoWindow: true
+      });
+    }
+    document.getElementById('next_page').href ="{% url 'bar_crime_data'%}?data_visual="+counting_list;
+  }
+  </script>
+</html>

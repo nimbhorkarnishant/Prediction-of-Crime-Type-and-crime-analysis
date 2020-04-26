@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>MINI Project|Crime Data Visualization</title>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+
+		<style>
+		/*font-family: 'Jomolhari', serif;
+		font-family: 'Big Shoulders Text', cursive;
+		font-family: 'ZCOOL XiaoWei', serif;*/
+
+			body{
+			margin: 0;
+			padding: 0;
+
+		}
+
+		nav{
+			display: flex;
+			background: #333;  /* fallback for old browsers #573d7a*/
+		  background: -webkit-linear-gradient(to right, #333,#333);  /* Chrome 10-25, Safari 5.1-6 */
+		  background: linear-gradient(to right, #333,#333); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+		}
+
+		footer{
+		  display: flex;
+		  background-color: #333;
+		  height: 70px;
+		  bottom: 0px;
+		  left: 0px;
+		  right: 0px;
+		  margin-bottom: -19px;
+		}
+
+		footer div{
+		  height: 10vh;
+
+
+		}
+
+
+		/* Set a style for all buttons */
+		button {
+		  background-color: #333;
+		  color: white;
+		  padding: 8px 20px;
+		  margin: 10px 0;
+		  border: none;
+		  cursor: pointer;
+		  width: 40%;
+		  opacity: 0.9;
+		  margin-left: 25%;
+		}
+
+		button:hover {
+		  opacity:1;
+		}
+
+		/* Change styles for cancel button and signup button on extra small screens */
+
+
+
+
+		</style>
+
+<script>
+window.onload = function () {
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light1", // "light1", "light2", "dark1", "dark2"
+	title:{
+		text: "Data Visualization Crime Type Prediction"
+	},
+	axisY: {
+		title: "Crime Rate"
+	},
+	data: [{
+		type: "column",
+		showInLegend: true,
+		legendMarkerColor: "grey",
+		legendText: "Crime Type",
+		dataPoints: [
+			{ y: {{data.Robbery}}, label: "Robbery" },
+			{ y:  {{data.Gambling}},  label: "Gambling" },
+			{ y:  {{data.Accident}},  label: "Accident" },
+			{ y:  {{data.Violence}},  label: "Violence" },
+			{ y:  {{data.Kidnapping}},  label: "Kidnapping" },
+			{ y:  {{data.Murder}}, label: "Murder" },
+		]
+	}]
+});
+chart.render();
+
+var box=document.getElementById('suggest_message');
+
+
+}
+</script>
+</head>
+<body>
+	<nav class="navbar navbar-light bg-light">
+		<a class="navbar-brand" style="font-family: "Big Shoulders Text", cursive;  font-weight: bold; color:darkgreen; font-size: 1rem; "><b style="color:#FFF;"><i>MINI PROJECT</i></b></a>
+	</nav>
+	<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+	<div class=""  style="margin-top:20px;">
+		<div class="card">
+			<img src="" alt="" width="10%" height="10%">
+			<div class="card-body">
+				<h5 class="card-title" style="color:darkgreen">Message</h5>
+				<p class="card-text" id="suggest_message"><b>The Route through which you will travel having above crimes.
+				So be aware according to above data.Be Safe and happy Gurney..</b></p>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+	</div>
+	<footer style="margin-top:140px;">
+		<div class="container">
+			<p style="text-align: center; color: #fff; font-size: 1rem; padding-top: 0.2rem;">&copy; 2020 mini project.in<p>
+		</div>
+	</footer>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
